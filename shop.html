@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Sidma Decor</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { bg: '#0A0A0A', surface: '#141414', 'surface-2': '#1C1C1C', border: '#2A2A2A', 'text-1': '#F5F4F1', 'text-2': '#9A9A9A', 'text-3': '#5A5A5A', accent: '#D4AF6A', 'accent-dim': '#8A6E3A' },
+                fontFamily: { display: ['"Cormorant Garamond"', 'serif'], body: ['"DM Sans"', 'sans-serif'] }
+            }}
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-bg text-text-1 font-body antialiased">
+
+    <!-- Reused Sticky Navbar from index.html -->
+    <nav id="navbar" class="fixed top-0 w-full h-[64px] bg-bg/85 backdrop-blur-md z-50 flex items-center justify-between px-6 md:px-12 border-b border-border">
+        <div class="flex items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:scale-105 transition-transform">
+                    <rect width="100" height="100" rx="50" fill="#141414"/>
+                    <path d="M40 30 C 65 30 70 50 50 60 C 30 70 35 90 60 90" stroke="url(#paint_nav)" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="60" y1="20" x2="60" y2="80" stroke="url(#paint_nav)" stroke-width="6" stroke-linecap="round"/>
+                    <defs><linearGradient id="paint_nav" x1="50" y1="20" x2="50" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#C9C9C9"/><stop offset="1" stop-color="#F5F4F1"/></linearGradient></defs>
+                </svg>
+                <span class="font-display text-xl tracking-wide hidden sm:block">Sidma Decor</span>
+            </a>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-ui">
+            <a href="shop.html" class="text-accent transition-colors">Shop</a>
+            <a href="quiz.html" class="text-text-1 hover:text-accent transition-colors">Quiz</a>
+            <a href="index.html#about" class="text-text-1 hover:text-accent transition-colors">About</a>
+            <a href="chat.html" class="text-accent hover:text-accent-dim transition-colors flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Chat with AI
+            </a>
+        </div>
+        <div class="flex items-center gap-6">
+            <button class="cart-icon-btn hover:text-accent transition-colors relative">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                <span class="cart-count-badge absolute -top-1.5 -right-2 bg-accent text-bg text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center" style="display:none">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="pt-32 pb-12 px-6 md:px-12 bg-surface border-b border-border text-center reveal">
+        <h1 class="font-display text-5xl md:text-6xl mb-4">The Collection</h1>
+        <p class="text-text-2">Curated pieces to elevate your space.</p>
+    </header>
+
+    <div class="container mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row gap-12">
+        <!-- Sidebar Filters (220px) -->
+        <aside class="w-full md:w-[220px] shrink-0 sticky top-24 self-start hidden md:block reveal">
+            <div class="mb-8">
+                <div class="relative">
+                    <i data-lucide="search" class="w-4 h-4 text-text-3 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="shop-search" placeholder="Search products..." class="w-full bg-surface border border-border rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-accent transition-colors">
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-sm font-medium uppercase tracking-widest text-text-1 mb-4">Sort By</h3>
+                <select id="sort-select" class="w-full bg-surface border border-border rounded-lg px-4 py-2 text-sm text-text-1 focus:outline-none focus:border-accent appearance-none">
+                    <option value="popular">Popular</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="newest">Newest Arrivals</option>
+                </select>
+            </div>
+
+            <div class="mb-8 border-t border-border pt-6">
+                <h3 class="text-sm font-medium uppercase tracking-widest text-text-1 mb-4">Room Type</h3>
+                <div class="flex flex-col gap-3 text-sm text-text-2">
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-category accent-[#D4AF6A]" value="living-room"> Living Room
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-category accent-[#D4AF6A]" value="bedroom"> Bedroom
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-category accent-[#D4AF6A]" value="study"> Study & Work
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-category accent-[#D4AF6A]" value="dining"> Dining Area
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-category accent-[#D4AF6A]" value="balcony"> Balcony
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8 border-t border-border pt-6">
+                <h3 class="text-sm font-medium uppercase tracking-widest text-text-1 mb-4">Product Type</h3>
+                <div class="flex flex-col gap-3 text-sm text-text-2">
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-type accent-[#D4AF6A]" value="table-lamp"> Table Lamps
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-type accent-[#D4AF6A]" value="sconce"> Wall Sconces
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-type accent-[#D4AF6A]" value="pendant"> Pendants
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-type accent-[#D4AF6A]" value="string-lights"> String Lights
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-text-1 transition-colors">
+                        <input type="checkbox" class="filter-type accent-[#D4AF6A]" value="floor-lamp"> Floor Lamps
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8 border-t border-border pt-6">
+                <h3 class="text-sm font-medium uppercase tracking-widest text-text-1 mb-4">Price Range</h3>
+                <input type="range" id="price-range" min="299" max="5000" value="5000" class="w-full accent-[#D4AF6A]">
+                <div class="flex justify-between text-xs text-[#5A5A5A] mt-1">
+                  <span>₹299</span>
+                  <span id="price-display" class="text-[#D4AF6A] font-medium">₹5,000</span>
+                </div>
+            </div>
+
+            <button onclick="clearFilters()" class="text-sm text-accent hover:underline">Clear All Filters</button>
+        </aside>
+
+        <!-- Product Grid -->
+        <main class="flex-1 reveal reveal-delay-1">
+            <div class="flex justify-between items-center mb-6">
+                <span id="product-count" class="text-sm text-text-2">Showing 12 products</span>
+                <button class="md:hidden flex items-center gap-2 text-sm border border-border px-4 py-2 rounded-lg hover:text-accent transition-colors">
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4"></i> Filter
+                </button>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Products injected here via JS -->
+            </div>
+        </main>
+    </div>
+
+<!-- Cart Overlay -->
+<div id="cart-overlay" class="fixed inset-0 bg-black/60 z-[998] opacity-0 pointer-events-none transition-opacity duration-300" onclick="Cart.closeDrawer()"></div>
+
+<!-- Cart Drawer -->
+<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-[400px] bg-[#141414] z-[999] transform translate-x-full transition-transform duration-300 flex flex-col border-l border-[#2A2A2A]">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-[#2A2A2A]">
+    <h2 class="font-display text-2xl">Your Cart</h2>
+    <button onclick="Cart.closeDrawer()" class="text-[#9A9A9A] hover:text-[#F5F4F1] transition-colors">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+  </div>
+  
+  <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center text-center p-8">
+    <svg class="w-16 h-16 text-[#2A2A2A] mb-4" viewBox="0 0 64 64" fill="none">
+      <path d="M8 8h8l8 32h24l8-24H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="28" cy="48" r="3" stroke="currentColor" stroke-width="2"/>
+      <circle cx="44" cy="48" r="3" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <p class="text-[#9A9A9A] mb-6">Your cart is empty. Let the AI help you find something beautiful.</p>
+    <button onclick="Cart.closeDrawer(); window.location.href='shop.html'" class="bg-[#D4AF6A] text-[#0A0A0A] rounded-full px-6 py-2.5 text-sm font-medium">Browse Collection</button>
+  </div>
+  
+  <div id="cart-items-list" class="flex-1 overflow-y-auto px-6 py-2"></div>
+  
+  <div id="cart-subtotal" class="px-6 py-4 border-t border-[#2A2A2A]"></div>
+  <div class="px-6 pb-8 pt-2">
+    <button class="w-full bg-[#D4AF6A] text-[#0A0A0A] rounded-full py-4 font-medium hover:bg-[#8A6E3A] transition-colors">
+      Proceed to Checkout →
+    </button>
+    <button onclick="Cart.closeDrawer()" class="w-full text-center text-sm text-[#5A5A5A] mt-3 hover:text-[#9A9A9A] transition-colors">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- FLOATING AI CHAT BUTTON -->
+<a href="chat.html" id="floating-ai-btn" aria-label="Open AI Lighting Advisor">
+  <div class="fab-ring"></div>
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" class="fab-lantern">
+    <rect x="10" y="2" width="8" height="3" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+    <path d="M14 2 Q14 0 14 0" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="7" y="5" width="14" height="17" rx="3" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+    <rect x="9" y="7" width="10" height="13" rx="2" fill="url(#flame-grad)"/>
+    <rect x="9" y="22" width="10" height="3" rx="1.5" fill="rgba(255,255,255,0.8)"/>
+    <path d="M14 10 Q16 13 14 17 Q12 13 14 10Z" fill="rgba(255,220,100,0.9)" class="fab-flame"/>
+    <defs>
+      <radialGradient id="flame-grad" cx="50%" cy="60%" r="50%">
+        <stop offset="0%" stop-color="#FFD97D" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#D4AF6A" stop-opacity="0.2"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <span class="fab-label">Ask AI</span>
+  <div class="fab-dot"></div>
+  <div class="fab-tooltip">✦ Sidma AI • Lighting Advisor</div>
+</a>
+
+<script src="script.js"></script>
+<script>
+const PRODUCTS = [
+  { id:'p001', name:'Minimalist Globe Pendant', desc:'Warm brass finish, dimmable', price:1499, originalPrice:2199, discount:32, category:'living-room', type:'pendant', img:'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600' },
+  { id:'p002', name:'Nordic Bedside Sconce', desc:'Matte black with gold accent', price:899, originalPrice:1299, discount:30, category:'bedroom', type:'sconce', img:'https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=600' },
+  { id:'p003', name:'Pleated Table Lamp', desc:'Vintage style, warm glow', price:1249, originalPrice:1999, discount:37, category:'bedroom', type:'table-lamp', img:'https://images.unsplash.com/photo-1524311841369-026857e4e1de?q=80&w=600' },
+  { id:'p004', name:'Amber Glass Pendant', desc:'Handblown glass, retro feel', price:1799, originalPrice:2499, discount:28, category:'dining', type:'pendant', img:'https://images.unsplash.com/photo-1617325247661-675003099ea6?q=80&w=600' },
+  { id:'p005', name:'Rattan Woven Pendant', desc:'Natural fiber, boho warmth', price:649, originalPrice:999, discount:35, category:'living-room', type:'pendant', img:'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600' },
+  { id:'p006', name:'Industrial Edison Lamp', desc:'Edison bulb, exposed filament', price:799, originalPrice:1199, discount:33, category:'study', type:'table-lamp', img:'https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?q=80&w=600' },
+  { id:'p007', name:'Fairy String Lights 5m', desc:'Warm white, USB powered', price:399, originalPrice:599, discount:33, category:'bedroom', type:'string-lights', img:'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600' },
+  { id:'p008', name:'Lotus Hanging Lamp', desc:'Paper lantern, soft diffused glow', price:549, originalPrice:799, discount:31, category:'dining', type:'pendant', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600' },
+  { id:'p009', name:'Copper Arc Floor Lamp', desc:'360° adjustable, sleek copper', price:3499, originalPrice:4999, discount:30, category:'living-room', type:'floor-lamp', img:'https://images.unsplash.com/photo-1585412732-3a30EB898498?q=80&w=600' },
+  { id:'p010', name:'Clip Study Lamp', desc:'Flexible arm, cool white LED', price:449, originalPrice:699, discount:35, category:'study', type:'table-lamp', img:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=600' },
+  { id:'p011', name:'Moon Wall Light', desc:'3D crescent, warm ambient', price:1099, originalPrice:1599, discount:31, category:'bedroom', type:'wall-light', img:'https://images.unsplash.com/photo-1615387901697-0da5ba5ca50b?q=80&w=600' },
+  { id:'p012', name:'Balcony Lantern Set 2pc', desc:'Weatherproof, warm candle flame', price:899, originalPrice:1299, discount:30, category:'balcony', type:'lantern', img:'https://images.unsplash.com/photo-1531299244235-5c59ef9a47d0?q=80&w=600' },
+];
+
+let filteredProducts = [...PRODUCTS];
+
+function renderProducts(products) {
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
+  
+  if (products.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full text-center py-24">
+        <p class="text-[#9A9A9A] text-lg mb-4">No products match your filters.</p>
+        <button onclick="clearFilters()" class="text-[#D4AF6A] hover:underline">Clear all filters</button>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = products.map((p, i) => `
+    <div class="bg-[#1C1C1C] border border-[#2A2A2A] rounded-2xl overflow-hidden group reveal" style="animation-delay: ${i*50}ms" data-category="${p.category}" data-type="${p.type}">
+      <div class="relative aspect-square overflow-hidden bg-black">
+        <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 lazy-img" alt="${p.name}" loading="lazy">
+        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <span class="bg-[#0A0A0A]/80 text-[#F5F4F1] text-sm px-4 py-2 rounded-full">Quick View</span>
+        </div>
+        <button class="absolute top-4 right-4 bg-[#0A0A0A]/50 backdrop-blur-sm p-2 rounded-full hover:text-[#D4AF6A] transition-colors wishlist-btn" data-id="${p.id}">
+          <i data-lucide="heart" class="w-4 h-4"></i>
+        </button>
+        ${p.discount ? `<span class="absolute top-4 left-4 bg-[#D4AF6A] text-[#0A0A0A] text-[10px] font-bold px-2 py-0.5 rounded-full">${p.discount}% OFF</span>` : ''}
+      </div>
+      <div class="p-5">
+        <h3 class="text-[15px] font-medium text-[#F5F4F1] mb-1 truncate">${p.name}</h3>
+        <p class="text-[13px] text-[#9A9A9A] mb-3 truncate">${p.desc}</p>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-[#D4AF6A] text-lg font-medium">₹${p.price.toLocaleString('en-IN')}</span>
+          ${p.originalPrice ? `<span class="text-[#5A5A5A] line-through text-sm">₹${p.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+        </div>
+        <button onclick="Cart.add({id:'${p.id}',name:'${p.name.replace(/'/g, "\\'")}',price:${p.price},originalPrice:${p.originalPrice||p.price},image:'${p.img}'})" 
+          class="w-full border border-[#D4AF6A] text-[#D4AF6A] hover:bg-[#D4AF6A] hover:text-[#0A0A0A] transition-colors rounded-full py-2 text-sm font-medium">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+  
+  // Re-run observer on newly injected elements
+  document.querySelectorAll('#product-grid .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 50); // fast trigger for items already in view
+  });
+}
+
+function applyFilters() {
+  const activeCategories = [...document.querySelectorAll('.filter-category:checked')].map(c => c.value);
+  const activeTypes = [...document.querySelectorAll('.filter-type:checked')].map(c => c.value);
+  const maxPrice = parseInt(document.getElementById('price-range')?.value || 5000);
+  const searchQuery = document.getElementById('shop-search')?.value?.toLowerCase() || '';
+  const sortBy = document.getElementById('sort-select')?.value || 'popular';
+
+  let results = PRODUCTS.filter(p => {
+    const matchesCategory = activeCategories.length === 0 || activeCategories.includes(p.category);
+    const matchesType = activeTypes.length === 0 || activeTypes.includes(p.type);
+    const matchesPrice = p.price <= maxPrice;
+    const matchesSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+    return matchesCategory && matchesType && matchesPrice && matchesSearch;
+  });
+
+  if (sortBy === 'price-asc') results.sort((a,b) => a.price - b.price);
+  else if (sortBy === 'price-desc') results.sort((a,b) => b.price - a.price);
+  else if (sortBy === 'newest') results.reverse();
+  else results.sort((a,b) => (b.discount || 0) - (a.discount || 0)); // popular = most discounted
+
+  document.getElementById('product-count').textContent = `Showing ${results.length} products`;
+  renderProducts(results);
+}
+
+function clearFilters() {
+  document.querySelectorAll('.filter-category, .filter-type').forEach(cb => cb.checked = false);
+  document.getElementById('price-range').value = 5000;
+  document.getElementById('price-display').textContent = '₹5,000';
+  document.getElementById('shop-search').value = '';
+  document.getElementById('sort-select').value = 'popular';
+  applyFilters();
+}
+
+// Attach events
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+  renderProducts(PRODUCTS);
+  document.querySelectorAll('.filter-category, .filter-type').forEach(cb => cb.addEventListener('change', applyFilters));
+  document.getElementById('price-range')?.addEventListener('input', (e) => {
+    document.getElementById('price-display').textContent = '₹' + parseInt(e.target.value).toLocaleString('en-IN');
+    applyFilters();
+  });
+  document.getElementById('shop-search')?.addEventListener('input', applyFilters);
+  document.getElementById('sort-select')?.addEventListener('change', applyFilters);
+});
+</script>
+</body>
+</html>
