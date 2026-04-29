@@ -238,3 +238,7 @@ h1, h2, h3, h4, h5, h6, .font-display {
 #floating-ai-btn:hover .fab-tooltip {
   opacity: 1;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
